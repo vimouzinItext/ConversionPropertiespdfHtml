@@ -7,20 +7,22 @@ using iText.StyledXmlParser.Css.Media;
 using System;
 using System.IO;
 
-namespace ConversionProperties
+namespace BaseUriExample
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            for (int i = 0; i < 15; i++)
-            {
-                FileStream htmlSource = File.Open("input.html", FileMode.Open);
-                FileStream pdfDest = File.Open("output.pdf", FileMode.OpenOrCreate);
-                HtmlConverter.ConvertToPdf(htmlSource, pdfDest);
-                htmlSource.Close();
-                pdfDest.Close();
-            }
-        }
+        public static void Main(String[] args)
+       {
+          ConverterProperties properties = new ConverterProperties();
+          SetBaseUri(properties);
+          FileStream htmlSource = File.Open("input.html", FileMode.Open);
+          FileStream pdfDest = File.Open("output.pdf", FileMode.OpenOrCreate);
+          HtmlConverter.ConvertToPdf(htmlSource,pdfDest,properties);
+       }
+
+    public static void SetBaseUri(ConverterProperties properties)
+    {
+        properties.SetBaseUri("\\Example\\main\\Resources\\HtmlResources\\");
     }
+ }
 }
